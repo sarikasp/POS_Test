@@ -1,0 +1,15 @@
+{
+  "name": "pos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^14.0.3",
+    "npx": "^10.2.2"
+  }
+}
