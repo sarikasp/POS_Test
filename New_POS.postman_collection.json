@@ -1,0 +1,204 @@
+{
+	"info": {
+		"_postman_id": "19df9b93-4197-4e7a-a5e2-92703b911537",
+		"name": "New_POS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12208842",
+		"_collection_link": "https://universal-desert-399167.postman.co/workspace/3ab131d8-655e-438f-82e5-417062f512b8/collection/12208842-19df9b93-4197-4e7a-a5e2-92703b911537?action=share&source=collection_link&creator=12208842"
+	},
+	"item": [
+		{
+			"name": "GET_All_State_City_Postcodes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let body = pm.response.json();\r",
+							"\r",
+							"pm.test('verify add state request', function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    console.log(body)\r",
+							"    console.log(body[0])\r",
+							"    pm.expect(body[0]).to.have.property('stateNm');\r",
+							"})\r",
+							"pm.test('verify state and city name',function(){\r",
+							"    pm.expect(body[0]).to.have.property('city');\r",
+							"    pm.expect(body[0].postCode).to.eq(String(pm.iterationData.get(\"postCode\")));\r",
+							"    pm.expect(body[0].stateNm).to.eq(pm.iterationData.get(\"stateNm\"));\r",
+							"    pm.expect(body[0].city).to.eq(pm.iterationData.get(\"city\"));\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"postCode\": \"{{postCode}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/getStateByPostcode",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"getStateByPostcode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let body = pm.response.json();\r",
+							"\r",
+							"pm.test('verify estimate time, total amount, name properties in request', function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    console.log(body)\r",
+							"    console.log(body[0])\r",
+							"    pm.expect(body[0]).to.have.property('estimateDelivery');\r",
+							"    pm.expect(body[0]).to.have.property('name');\r",
+							"    pm.expect(body[0]).to.have.property('totalAmount');\r",
+							"})\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"country\":  \"{{country}}\", \r\n\"weight\":  \"{{weight}}\", \r\n\"postcodeFrom\":  \"{{postcodeFrom}}\", \r\n\"postcodeTo\":  \"{{postcodeTo}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/price",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"price"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Countries",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let body = pm.response.json();\r",
+							"\r",
+							"pm.test('verify status code and Country name in request', function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(body[0]).to.have.property('CountryName');\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/countries",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"countries"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "postCode",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "country",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "postcodeFrom",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "postcodeTo",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "weight",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
