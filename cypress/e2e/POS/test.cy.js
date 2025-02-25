@@ -7,7 +7,7 @@ describe('Shipment Quote Calculation', () => {
 
     beforeEach(() => {
         // Intercept the API call for shipment price calculation
-        cy.intercept('POST', 'https://www-api.pos.com.my/api/price').as('getData');
+        cy.intercept('POST', '**/api/price').as('getData');
     });
 
     Countries.forEach((data, i) => {
